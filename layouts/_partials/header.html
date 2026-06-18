@@ -9,10 +9,20 @@
       <p class="site-kicker">{{ $ui.brandKicker | default "Literary Journal" }}</p>
       <a class="site-title" href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a>
     </div>
-    {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
     <div class="header-actions">
-      <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation"
-        aria-label="{{ $ui.navToggleAriaLabel | default " Toggle navigation" }}">
+      {{- if ne $features.enableSearch false }}
+        <button class="search-toggle" type="button" data-search-open aria-expanded="false" aria-controls="site-search-root" aria-label="{{ $ui.searchToggleAriaLabel | default "Open search" }}" title="{{ $ui.searchToggleAriaLabel | default "Open search" }}">
+          <span class="search-toggle__icon" aria-hidden="true">&#9906;</span>
+          <span class="search-toggle__text">{{ $ui.searchToggleText | default "Search" }}</span>
+        </button>
+      {{- end }}
+      {{- if ne $features.enableThemeToggle false }}
+        <button class="theme-toggle" type="button" data-theme-toggle data-label-dark="{{ $themeLabelDark }}" data-label-light="{{ $ui.themeToggleLabelLightMode | default "Light mode" }}" data-aria-dark="{{ $themeAriaToDark }}" data-aria-light="{{ $themeAriaToLight }}" aria-label="{{ $themeAriaToDark }}" title="{{ $themeAriaToDark }}">
+          <span class="theme-toggle__dot" aria-hidden="true"></span>
+          <span class="theme-toggle__text" data-theme-label>{{ $themeLabelDark }}</span>
+        </button>
+      {{- end }}
+      <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation" aria-label="{{ $ui.navToggleAriaLabel | default "Toggle navigation" }}">
         <span class="nav-toggle__text">{{ $ui.navToggleText | default "Menu" }}</span>
         <span class="nav-toggle__bars" aria-hidden="true">
           <span></span>
@@ -20,25 +30,7 @@
           <span></span>
         </span>
       </button>
-      {{- if ne $features.enableSearch false }}
-      <button class="search-toggle" type="button" data-search-open aria-expanded="false"
-        aria-controls="site-search-root" aria-label="{{ $ui.searchToggleAriaLabel | default " Open search" }}"
-        title="{{ $ui.searchToggleAriaLabel | default " Open search" }}">
-        <span class="search-toggle__icon" aria-hidden="true">&#9906;</span>
-        <span class="search-toggle__text">{{ $ui.searchToggleText | default "Search" }}</span>
-      </button>
-      {{- end }}
-      {{- if ne $features.enableThemeToggle false }}
-      <button class="theme-toggle" type="button" data-theme-toggle data-label-dark="{{ $themeLabelDark }}"
-        data-label-light="{{ $ui.themeToggleLabelLightMode | default " Light mode" }}"
-        data-aria-dark="{{ $themeAriaToDark }}" data-aria-light="{{ $themeAriaToLight }}"
-        aria-label="{{ $themeAriaToDark }}" title="{{ $themeAriaToDark }}">
-        <span class="theme-toggle__dot" aria-hidden="true"></span>
-        <span class="theme-toggle__text" data-theme-label>{{ $themeLabelDark }}</span>
-      </button>
-      {{- end }}
-
     </div>
   </div>
-
+  {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
 </header>
