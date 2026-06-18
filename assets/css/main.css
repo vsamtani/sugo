@@ -217,7 +217,7 @@ img {
    /* some styles are being always overwritten check here again */
 .site-header {
   border-bottom: 1px solid var(--color-border);
-  background: linear-gradient(180deg, var(--color-surface-strong), var(--color-bg));
+  /* background: linear-gradient(180deg, var(--color-surface-strong), var(--color-bg)); */
 }
 
 .site-topbar {
@@ -236,6 +236,7 @@ img {
 }
 
 .site-kicker {
+  display: none;
   font-family: var(--font-ui);
   font-size: 0.72rem;
   letter-spacing: 0.22em;
